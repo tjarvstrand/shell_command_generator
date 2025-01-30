@@ -1,0 +1,14 @@
+name: shell_command_generator_example
+description: Example app for shell_command_generator
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.5.1
+
+dependencies:
+  build_runner: ^2.4.14
+  shell_command_generator:
+    path: ..
+
+

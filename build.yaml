@@ -1,0 +1,22 @@
+builders:
+  shell_command_generator:
+    import: 'package:shell_command_generator/shell_command_generator.dart'
+    builder_factories: [ 'shellCommandGeneratorBuilder' ]
+    build_extensions: { ".dart": [ ".shell_command_generator.g.part" ] }
+    build_to: cache
+    auto_apply: dependents
+    applies_builders: ["source_gen|combining_builder"]
+
+targets:
+  $default:
+    sources:
+      include:
+        - test/**
+        - lib/**
+        # Note that it is important to include these in the default target.
+        - lib/$lib$
+        - $package$
+        - pubspec.*
+    builders:
+      shell_command_generator:
+        enabled: true
