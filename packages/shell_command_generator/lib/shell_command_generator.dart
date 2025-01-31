@@ -44,8 +44,10 @@ class _Generator extends GeneratorForAnnotation<Shell> {
       throw Exception(result.stderr);
     }
 
+    final trim = annotation.read('trim').boolValue;
+
     final name = '_\$${element.name}';
-    final string = result.stdout.toString().replaceAll("'", r"\'").replaceAll(r'$', r'\$');
-    yield """const $name = '''$string''';\n\n""";
+    final output = (result.stdout as String).replaceAll("'", r"\'''").replaceAll(r'$', r'\$');
+    yield """const $name = '''${trim ? output.trim() : output}''';\n\n""";
   }
 }

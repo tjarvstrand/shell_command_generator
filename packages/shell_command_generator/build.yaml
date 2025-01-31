@@ -1,6 +1,6 @@
 builders:
   shell_command_generator:
-    import: 'package:shell_command_generator/shell_command_generator_annotation.dart'
+    import: 'package:shell_command_generator/shell_command_generator.dart'
     builder_factories: [ 'shellCommandGeneratorBuilder' ]
     build_extensions: { ".dart": [ ".shell_command_generator.g.part" ] }
     build_to: cache

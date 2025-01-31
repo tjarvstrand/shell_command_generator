@@ -8,7 +8,9 @@ export 'package:meta/meta.dart' show protected;
 
 /// An annotation indicating that a variable's value should be derived from a shell command.
 ///
-/// See [Process.run] for more information on the parameters.
+/// By default trims whitespace from the output. If you want to preserve whitespace, set [trim] to false.
+///
+/// See [Process.run] for more information on other parameters.
 @Target({TargetKind.topLevelVariable, TargetKind.getter, TargetKind.field, TargetKind.method, TargetKind.function})
 class Shell {
   const Shell(
@@ -18,6 +20,7 @@ class Shell {
     this.environment = const {},
     this.includeParentEnvironment = true,
     this.runInShell = false,
+    this.trim = true,
   });
 
   final String command;
@@ -26,4 +29,5 @@ class Shell {
   final Map<String, String> environment;
   final bool includeParentEnvironment;
   final bool runInShell;
+  final bool trim;
 }
