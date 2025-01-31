@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:shell_command_generator/shell_command_generator.dart';
+import 'package:shell_command_generator_annotation/shell_command_generator_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
 Builder shellCommandGeneratorBuilder(BuilderOptions options) => SharedPartBuilder(

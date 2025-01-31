@@ -1,0 +1,15 @@
+name: shell_command_generator_annotation
+description: Run shell commands as part of your build process.
+version: 0.1.0
+homepage: https://github.com/tjarvstrand/shell_command_generator
+
+environment:
+  sdk: ^3.6.0
+
+resolution: workspace
+
+dependencies:
+  meta:
+
+dev_dependencies:
+  lints: ^4.0.0

@@ -4,11 +4,12 @@ version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: ^3.5.1
+  sdk: ^3.6.0
+
+resolution: workspace
 
 dependencies:
-  build_runner: ^2.4.14
+  shell_command_generator_annotation:
+
+dev_dependencies:
   shell_command_generator:
-    path: ..
-
-
