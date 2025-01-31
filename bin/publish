@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+
+export THIS_DIR=$(cd $(dirname "${BASH_SOURCE[$((${#BASH_SOURCE[@]} - 1))]}"); pwd)
+
+cd "${THIS_DIR}/.."
+
+if [ "$(git rev-parse --abbrev-ref HEAD)" != 'main' ]; then
+    echo "Error: Not on main..."
+    exit 1
+fi
+
+function latest-version {
+    curl -qs -H 'Accept: application/vnd.pub.v2+json' https://pub.dev/api/packages/$1 | jq -r '.latest.version'
+}
+
+function publish {
+    cd packages/$1
+    VERSION=$(grep 'version:.*' pubspec.yaml | tr -d ' ' | cut -d ':' -f 2)
+    if [ "$(latest-version $1)" == "$VERSION" ]; then
+        echo "$1 $VERSION is already published"
+        return 0
+    fi
+    if [ -f pubspec_overrides.yaml ]; then
+        mv -v pubspec_overrides.yaml _pubspec_overrides.yaml
+    fi
+    flutter pub publish --force
+    RESULT=$?
+    if [ -f _pubspec_overrides.yaml ]; then
+      mv -v _pubspec_overrides.yaml pubspec_overrides.yaml
+    fi
+    if [ $RESULT -ne 0 ]; then
+        return $RESULT
+    fi
+    until [ "$(latest-version $1)" == "$VERSION" ]; do
+        echo 'Waiting...'
+        sleep 3
+    done
+}
+
+(publish shell_command_generator_annotation)
+(publish shell_command_generator)
