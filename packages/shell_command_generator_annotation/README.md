@@ -1,1 +1,1 @@
-#### This is the annotation for the shell_command_generator package. See that package for more information.
+#### This is the annotation for the [shell_command_generator](https://pub.dev/packages/shell_command_generator) package.
