@@ -1,4 +1,4 @@
-name: _
+name: shell_command_generator_workspace
 publish_to: none
 environment:
   sdk: ^3.6.0
