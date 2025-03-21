@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Fix builder formatter parameter
+
 ## 0.2.0
 
 - BREAKING: Update dependency major versions
