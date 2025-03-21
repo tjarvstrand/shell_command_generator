@@ -1,3 +1,9 @@
+## 0.2.0
+
+- BREAKING: Update dependency major versions
+  - `analyzer` to `7.0.0`
+  - `source_gen` to `2.0.0`
+
 ## 0.1.0
 
 - Initial version.
