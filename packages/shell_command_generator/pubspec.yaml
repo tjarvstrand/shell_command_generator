@@ -9,14 +9,15 @@ environment:
 resolution: workspace
 
 dependencies:
-  analyzer: ^6.8.0
+  analyzer: ^7.0.0
   build: ^2.4.1
-  shell_command_generator_annotation: ^0.1.0
-  source_gen: ^1.5.0
+  shell_command_generator_annotation: ^0.2.0
+  source_gen: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.4.14
   build_test: ^2.2.3
-  dart_style: ^2.3.8
-  lints: ^4.0.0
+  dart_style: ^3.0.1
+  lints: ^5.0.0
+  pub_semver: ^2.2.0
   test: ^1.24.0
