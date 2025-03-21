@@ -49,7 +49,6 @@ class _Generator extends GeneratorForAnnotation<Shell> {
 
     final name = '_\$${element.name}';
     final output = (result.stdout as String).replaceAll("'", r"\'").replaceAll(r'$', r'\$');
-    print(output);
     yield """const $name = '''${trim ? output.trim() : output}''';\n\n""";
   }
 }
