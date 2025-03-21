@@ -5,12 +5,13 @@ import 'package:build/build.dart';
 import 'package:shell_command_generator_annotation/shell_command_generator_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 
-Builder shellCommandGeneratorBuilder(BuilderOptions options) => SharedPartBuilder(
-      [_Generator()],
-      'shell_command_generator',
+Builder shellCommandGeneratorBuilder(BuilderOptions options) {
+  final formatter = options.config['formatter'];
+  return formatter == null
+      ? SharedPartBuilder([_Generator()], 'shell_command_generator')
       // ignore: avoid_dynamic_calls
-      formatOutput: options.config['formatter']?.format,
-    );
+      : SharedPartBuilder([_Generator()], 'shell_command_generator', formatOutput: formatter);
+}
 
 extension _ConstantReaderExt on ConstantReader {
   ConstantReader? get nullable => isNull ? null : this;
@@ -47,7 +48,8 @@ class _Generator extends GeneratorForAnnotation<Shell> {
     final trim = annotation.read('trim').boolValue;
 
     final name = '_\$${element.name}';
-    final output = (result.stdout as String).replaceAll("'", r"\'''").replaceAll(r'$', r'\$');
+    final output = (result.stdout as String).replaceAll("'", r"\'").replaceAll(r'$', r'\$');
+    print(output);
     yield """const $name = '''${trim ? output.trim() : output}''';\n\n""";
   }
 }

@@ -4,3 +4,6 @@ part 'success_quotes.g.dart';
 
 @Shell('echo', arguments: ['-n', "'bla'"])
 const String echo = _$echo;
+
+@Shell('echo', arguments: ['-n', "'''bla'''"])
+const String echo2 = _$echo2;
