@@ -1,6 +1,10 @@
+## 0.2.2
+
+- Remove print.
+
 ## 0.2.1
 
-- Fix builder formatter parameter
+- Fix builder formatter parameter.
 
 ## 0.2.0
 
