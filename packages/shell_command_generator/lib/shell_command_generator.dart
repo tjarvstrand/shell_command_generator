@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:shell_command_generator_annotation/shell_command_generator_annotation.dart';
 import 'package:source_gen/source_gen.dart';
@@ -25,7 +25,7 @@ class _Generator extends GeneratorForAnnotation<Shell> {
   String toString() => 'ShellCommandGenerator';
 
   @override
-  Stream<String> generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) async* {
+  Stream<String> generateForAnnotatedElement(Element2 element, ConstantReader annotation, BuildStep buildStep) async* {
     final command = annotation.read('command').stringValue;
     final arguments = annotation.read('arguments').stringListValue;
     final workingDirectory = annotation.read('workingDirectory').nullable?.stringValue;
@@ -47,7 +47,7 @@ class _Generator extends GeneratorForAnnotation<Shell> {
 
     final trim = annotation.read('trim').boolValue;
 
-    final name = '_\$${element.name}';
+    final name = '_\$${element.displayName}';
     final output = (result.stdout as String).replaceAll("'", r"\'").replaceAll(r'$', r'\$');
     yield """const $name = '''${trim ? output.trim() : output}''';\n\n""";
   }

@@ -19,20 +19,23 @@ Map<String, String> output(String name) {
   return {'shell_command_generator|$file': File(file).readAsStringSync()};
 }
 
-Future _builder(String resourceName, PackageAssetReader assetReader) => testBuilder(
-      shellCommandGeneratorBuilder(_builderOptions),
-      resource(resourceName),
-      outputs: output(resourceName),
-      reader: assetReader,
-    );
+Future<TestBuilderResult> _builder(String resourceName) async {
+  final readerWriter = TestReaderWriter(rootPackage: 'riverpod_stateful_service_generator');
+  await readerWriter.testing.loadIsolateSources();
+  return testBuilder(
+    shellCommandGeneratorBuilder(_builderOptions),
+    resource(resourceName),
+    outputs: output(resourceName),
+    readerWriter: readerWriter,
+  );
+}
 
 Future<void> main() async {
-  final assetReader = await PackageAssetReader.currentIsolate();
   group('Generators', () {
-    test('success_base', () => _builder('success_base', assetReader));
-    test('success_dollar', () => _builder('success_dollar', assetReader));
-    test('success_quotes', () => _builder('success_quotes', assetReader));
-    test('success_multiline', () => _builder('success_multiline', assetReader));
-    test('success_multiple_annotations', () => _builder('success_multiple_annotations', assetReader));
+    test('success_base', () => _builder('success_base'));
+    test('success_dollar', () => _builder('success_dollar'));
+    test('success_quotes', () => _builder('success_quotes'));
+    test('success_multiline', () => _builder('success_multiline'));
+    test('success_multiple_annotations', () => _builder('success_multiple_annotations'));
   });
 }
